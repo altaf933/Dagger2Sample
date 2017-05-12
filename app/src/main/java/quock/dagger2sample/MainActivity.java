@@ -1,5 +1,6 @@
 package quock.dagger2sample;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,11 +15,26 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity {
 
     @Inject
-    NetworkApi networkApi;
+    SharedPreferences sharedPreferences;
+//    @Inject
+//    Retrofit retrofit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ((YourApplication) getApplication()).getmNetComponent().inject(this);
+
+
         setContentView(R.layout.activity_main);
+
+
+        /*
+        * Test dependency inject
+        * */
+        sharedPreferences.edit().putString("key1", "value1");
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -30,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-//        boolean validUser = networkApi.isValidUser("abu", "asdf");
-//        boolean injected = networkApi == null ? false : true;
 
 
     }
