@@ -10,25 +10,47 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
+
+import quock.dagger2sample.GithubModule.GitHubApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
     @Inject
     SharedPreferences sharedPreferences;
-//    @Inject
-//    Retrofit retrofit;
+    @Inject
+    Retrofit retrofit;
+
+    @Inject
+    GitHubApiInterface gitHubApiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((YourApplication) getApplication()).getmNetComponent().inject(this);
+//        ((YourApplication) getApplication()).getmNetComponent().inject(this);
 
 
         setContentView(R.layout.activity_main);
 
+        Call<ArrayList<Repository>> repoAltaf = gitHubApiInterface.getRepository("altaf933");
+        repoAltaf.enqueue(new Callback<ArrayList<Repository>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Repository>> call, Response<ArrayList<Repository>> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Repository>> call, Throwable t) {
+
+            }
+        });
         /*
         * Test dependency inject
         * */

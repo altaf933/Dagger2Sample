@@ -36,6 +36,7 @@ public class NetModule {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
+
     @Provides
     @Singleton
     Cache provideOkHttpCache(Application application) {
@@ -43,6 +44,7 @@ public class NetModule {
         Cache cache = new Cache(application.getCacheDir(), cacheSize);
         return cache;
     }
+
 
     @Provides
     @Singleton
@@ -52,6 +54,7 @@ public class NetModule {
         return gsonBuilder.create();
     }
 
+     
     @Provides
     @Singleton
     OkHttpClient provideOKHttp(Cache cache) {

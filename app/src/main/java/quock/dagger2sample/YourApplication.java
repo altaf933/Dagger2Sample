@@ -8,7 +8,9 @@ import javax.inject.Inject;
 
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasDispatchingActivityInjector;
+import quock.component.DaggerGithubComponent;
 import quock.component.DaggerNetComponent;
+import quock.component.GithubComponent;
 import quock.component.NetComponent;
 
 /**
@@ -35,6 +37,11 @@ public class YourApplication extends Application implements HasDispatchingActivi
                 .netModule(new NetModule("https://api.github.com"))
                 .build();
 
+
+        GithubComponent githubComponent = DaggerGithubComponent.builder()
+                .netComponent(mNetComponent)
+                .githubModule(new GithubModule())
+                .build();
 
 
         boolean isValid = networkApi.isValidUser("", "");
